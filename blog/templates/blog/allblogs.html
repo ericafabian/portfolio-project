@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Erica Fabian</title>
+    <title>Erica's Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
 
@@ -58,7 +58,7 @@
       <div class="navbar-nav ms-auto">
         <a class="nav-link" aria-current="page" href="http://twitter.com/ericafabs">Twitter</a>
         <a class="nav-link" href="{% static 'ericaCV.pdf'%}">Resume</a>
-        <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+        <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
       </div>
     </div>
   </div>
@@ -66,42 +66,23 @@
 </header>
 
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Hi, I'm Erica.</h1>
-        <p class="lead text-muted">Hi! My name is Erica, and I love to make Django websites.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Email Me</a>
-        </p>
-        <img class="img-fluid" src="{% static 'erica.png' %}" height=200 width=200>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  
-       {% for job in jobs.all %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="{{ job.image.url }}" />
-
-            <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        
-        </div>
-      </div>
-    </div>
-  
-
+  <div class="container">
+    <h1 class="text-center pt-4">Blog</h1>
+    <br />
+    <br />
+    <h2>Latest Posts</h2>
+    <hr />
+    <br />
+     {% for blog in blogs.all %}
+        <a href="{% url 'detail' blog.id %}"><h3>{{blog.title}}</h3></a>
+        <p>{{blog.pub_date_pretty}}</p>
+        <img class="img-fluid" height=200 width=200 src="{{blog.image.url}}">
+        <br />
+        <p>{{blog.summary}}</p>
+        <br />
+        <br />
+     {% endfor %}
+  </div>
 </main>
 
 <footer class="text-muted py-5">
